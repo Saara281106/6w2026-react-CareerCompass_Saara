@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function ManageCareerPath() {
+export default function ManageMentorshipSession() {
   return (
     <>
       {/* START SECTION TOP */}
@@ -16,7 +16,7 @@ export default function ManageCareerPath() {
           <div className="row">
             <div className="col-lg-12 col-sm-12 col-xs-12 text-center">
               <div className="section-top-title">
-                <h1>Career Paths</h1>
+                <h1>Mentorship Session</h1>
               </div>
             </div>
             {/*- END COL */}
@@ -32,10 +32,10 @@ export default function ManageCareerPath() {
       <br />
       <div className="container">
         <div className="text-end">
-          <Link to="/admin/addCareerPath" >
+          <Link to="/admin/addMentorshipSession" >
             <button type="button" class="btn btn-sm btn-primary">
               {" "}
-              + Career Path{" "}
+              + Session{" "}
             </button>
           </Link>
         </div>
