@@ -110,6 +110,44 @@ export default function AdminHeader() {
                       </li>
                     </ul>
                   </li>
+
+                  <li className="has-children">
+                    <Link to="/admin/manageResource" className="nav-link text-light">
+                      Resources
+                    </Link>
+                    <ul className="dropdown">
+                      <li>
+                        <a href="single_service.html" className="nav-link">
+                          Email Marketing
+                        </a>
+                      </li>
+                      <li>
+                        <a href="single_service.html" className="nav-link">
+                          Offline SEO
+                        </a>
+                      </li>
+                      <li>
+                        <a href="single_service.html" className="nav-link">
+                          Social media marketing
+                        </a>
+                      </li>
+                      <li>
+                        <a href="single_service.html" className="nav-link">
+                          Lead Generation
+                        </a>
+                      </li>
+                      <li>
+                        <a href="single_service.html" className="nav-link">
+                          Web Design
+                        </a>
+                      </li>
+                      <li>
+                        <a href="single_service.html" className="nav-link">
+                          Search Engine optimization
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
                   
                 </ul>
               </nav>
