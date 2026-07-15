@@ -10,7 +10,7 @@ export default function Header() {
     e.preventDefault();
     AuthService.logout();
     toast.success("Logout Successful");
-    nav("/login");
+    nav("/");
   }
 
   return (

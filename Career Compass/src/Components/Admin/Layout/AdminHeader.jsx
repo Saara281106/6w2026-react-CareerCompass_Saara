@@ -10,7 +10,7 @@ export default function AdminHeader() {
     e.preventDefault()
     AuthService.logout()
     toast.success("Logout Successful");
-    nav("/login")
+    nav("/")
   }
   return (
     <>
@@ -56,111 +56,17 @@ export default function AdminHeader() {
                     </Link>
                     <ul className="dropdown">
                       <li>
-                        <Link to="/admin/carrerpath/add" className="nav-link">
-                         Add Carrier Program
+                        <Link to="/admin/careerpath/add" className="nav-link">
+                         Add Carrier Paths
                         </Link>
                       </li>
                       <li>
-                        <Link to="/admin/carrerpath/manage" className="nav-link">
-                         Manage Carrier Programs
+                        <Link to="/admin/careerpath/manage" className="nav-link">
+                         Manage Career Paths
                         </Link>
                       </li>
                      
                     </ul>
-                  </li>
-                  <li className="has-children">
-                    <Link
-                      to="/admin/manageMentorshipSession"
-                      className="nav-link text-light"
-                    >
-                      Mentorship Session
-                    </Link>
-                    <ul className="dropdown">
-                      <li>
-                        <a href="single_service.html" className="nav-link">
-                          Email Marketing
-                        </a>
-                      </li>
-                      <li>
-                        <a href="single_service.html" className="nav-link">
-                          Offline SEO
-                        </a>
-                      </li>
-                      <li>
-                        <a href="single_service.html" className="nav-link">
-                          Social media marketing
-                        </a>
-                      </li>
-                      <li>
-                        <a href="single_service.html" className="nav-link">
-                          Lead Generation
-                        </a>
-                      </li>
-                      <li>
-                        <a href="single_service.html" className="nav-link">
-                          Web Design
-                        </a>
-                      </li>
-                      <li>
-                        <a href="single_service.html" className="nav-link">
-                          Search Engine optimization
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-
-                  <li className="has-children">
-                    <Link
-                      to="/admin/manageResource"
-                      className="nav-link text-light"
-                    >
-                      Resources
-                    </Link>
-                    <ul className="dropdown">
-                      <li>
-                        <a href="single_service.html" className="nav-link">
-                          Email Marketing
-                        </a>
-                      </li>
-                      <li>
-                        <a href="single_service.html" className="nav-link">
-                          Offline SEO
-                        </a>
-                      </li>
-                      <li>
-                        <a href="single_service.html" className="nav-link">
-                          Social media marketing
-                        </a>
-                      </li>
-                      <li>
-                        <a href="single_service.html" className="nav-link">
-                          Lead Generation
-                        </a>
-                      </li>
-                      <li>
-                        <a href="single_service.html" className="nav-link">
-                          Web Design
-                        </a>
-                      </li>
-                      <li>
-                        <a href="single_service.html" className="nav-link">
-                          Search Engine optimization
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li className="">
-                    <Link
-                      to="/admin/viewBooking"
-                      className="nav-link text-light"
-                    >
-                      Booking
-                    </Link>
-                  </li>
-                  <li className="">
-                    <Link to="/admin/profile" className="nav-link text-light">
-                      Profile
-                    </Link>
                   </li>
                   <li className="">
                     <button type="button" class="btn btn-sm btn-warning">
