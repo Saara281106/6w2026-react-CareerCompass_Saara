@@ -1,6 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import AuthService from "../../../services/AuthService";
+import { toast } from "react-toastify";
 
 export default function Header() {
+  const nav = useNavigate();
+  const email = AuthService.getEmail();
+
+  function logout(e) {
+    e.preventDefault();
+    AuthService.logout();
+    toast.success("Logout Successful");
+    nav("/login");
+  }
+
   return (
     <>
       <>
@@ -33,90 +45,21 @@ export default function Header() {
                 >
                   <ul className="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block ">
                     <li className="">
-                      <Link to="/" className="nav-link text-light" >
+                      <Link to="/" className="nav-link text-light">
                         Home
                       </Link>
-
                     </li>
                     <li>
                       <Link className="nav-link text-light" to="/about">
                         About
                       </Link>
                     </li>
-                    <li className="has-children">
+                    <li className="">
                       <Link to="/services" className="nav-link text-light">
                         Career Path
                       </Link>
-                      <ul className="dropdown">
-                        <li>
-                          <a href="single_service.html" className="nav-link">
-                            Email Marketing
-                          </a>
-                        </li>
-                        <li>
-                          <a href="single_service.html" className="nav-link">
-                            Offline SEO
-                          </a>
-                        </li>
-                        <li>
-                          <a href="single_service.html" className="nav-link">
-                            Social media marketing
-                          </a>
-                        </li>
-                        <li>
-                          <a href="single_service.html" className="nav-link">
-                            Lead Generation
-                          </a>
-                        </li>
-                        <li>
-                          <a href="single_service.html" className="nav-link">
-                            Web Design
-                          </a>
-                        </li>
-                        <li>
-                          <a href="single_service.html" className="nav-link">
-                            Search Engine optimization
-                          </a>
-                        </li>
-                      </ul>
                     </li>
-                    <li className="has-children">
-                      <Link to="/mentorship" className="nav-link text-light">
-                        Mentorship Session
-                      </Link>
-                      <ul className="dropdown">
-                        <li>
-                          <a href="single_service.html" className="nav-link">
-                            Email Marketing
-                          </a>
-                        </li>
-                        <li>
-                          <a href="single_service.html" className="nav-link">
-                            Offline SEO
-                          </a>
-                        </li>
-                        <li>
-                          <a href="single_service.html" className="nav-link">
-                            Social media marketing
-                          </a>
-                        </li>
-                        <li>
-                          <a href="single_service.html" className="nav-link">
-                            Lead Generation
-                          </a>
-                        </li>
-                        <li>
-                          <a href="single_service.html" className="nav-link">
-                            Web Design
-                          </a>
-                        </li>
-                        <li>
-                          <a href="single_service.html" className="nav-link">
-                            Search Engine optimization
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
+
                     <li>
                       <Link className="nav-link text-light" to="/team">
                         Mentors
@@ -127,16 +70,40 @@ export default function Header() {
                         Contact
                       </Link>
                     </li>
-                    <li>
-                      <Link className="nav-link text-light" to="/register">
-                        Register
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="nav-link text-light" to="/login">
-                        Login
-                      </Link>
-                    </li>
+                    {email ? (
+                      <li>
+                        <button type="button" class="btn btn-sm btn-warning">
+                          <Link
+                            className="nav-link text-light"
+                            to="/login"
+                            onClick={logout}
+                          >
+                            Logout
+                          </Link>
+                        </button>
+                      </li>
+                    ) : (
+                      <>
+                        <li>
+                          <button type="button" class="btn btn-sm btn-warning">
+                            <Link
+                              className="nav-link text-light"
+                              to="/register"
+                            >
+                              Register
+                            </Link>
+                          </button>
+                        </li>
+                        
+                        <li>
+                          <button type="button" class="btn btn-sm btn-warning ms-3">
+                            <Link className="nav-link text-light" to="/login">
+                              Login
+                            </Link>
+                          </button>
+                        </li>
+                      </>
+                    )}
                   </ul>
                 </nav>
               </div>

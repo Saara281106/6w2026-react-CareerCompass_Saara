@@ -44,8 +44,8 @@ function App() {
           {/* Admin Panel Starts */}
           <Route path="/admin" element={<AdminLayout/>}>
             <Route index element={<AdminDashboard/>} />
-            <Route path="manageCareerPath" element={<ManageCareerPath/>} />
-            <Route path="addCareerPath" element={<AddCareerPath/>} />
+            <Route path="carrerpath/manage" element={<ManageCareerPath/>} />
+            <Route path="carrerpath/add" element={<AddCareerPath/>} />
             <Route path="manageMentorshipSession" element={<ManageMentorshipSession/>} />
             <Route path="addMentorshipSession" element={<AddMentorshipSession/>} />
             <Route path="manageResource" element={<ManageResources/>} />

@@ -1,6 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import AuthService from "../../../services/AuthService";
+import { toast } from "react-toastify";
 
 export default function AdminHeader() {
+
+  const nav = useNavigate()
+
+  function logout(e){
+    e.preventDefault()
+    AuthService.logout()
+    toast.success("Logout Successful");
+    nav("/login")
+  }
   return (
     <>
       {/* START NAVBAR */}
@@ -37,44 +48,31 @@ export default function AdminHeader() {
                     </Link>
                   </li>
                   <li className="has-children">
-                    <Link to="/admin/manageCareerPath" className="nav-link text-light">
+                    <Link
+                      
+                      className="nav-link text-light"
+                    >
                       Career Path
                     </Link>
                     <ul className="dropdown">
                       <li>
-                        <a href="single_service.html" className="nav-link">
-                          Email Marketing
-                        </a>
+                        <Link to="/admin/carrerpath/add" className="nav-link">
+                         Add Carrier Program
+                        </Link>
                       </li>
                       <li>
-                        <a href="single_service.html" className="nav-link">
-                          Offline SEO
-                        </a>
+                        <Link to="/admin/carrerpath/manage" className="nav-link">
+                         Manage Carrier Programs
+                        </Link>
                       </li>
-                      <li>
-                        <a href="single_service.html" className="nav-link">
-                          Social media marketing
-                        </a>
-                      </li>
-                      <li>
-                        <a href="single_service.html" className="nav-link">
-                          Lead Generation
-                        </a>
-                      </li>
-                      <li>
-                        <a href="single_service.html" className="nav-link">
-                          Web Design
-                        </a>
-                      </li>
-                      <li>
-                        <a href="single_service.html" className="nav-link">
-                          Search Engine optimization
-                        </a>
-                      </li>
+                     
                     </ul>
                   </li>
                   <li className="has-children">
-                    <Link to="/admin/manageMentorshipSession" className="nav-link text-light">
+                    <Link
+                      to="/admin/manageMentorshipSession"
+                      className="nav-link text-light"
+                    >
                       Mentorship Session
                     </Link>
                     <ul className="dropdown">
@@ -112,7 +110,10 @@ export default function AdminHeader() {
                   </li>
 
                   <li className="has-children">
-                    <Link to="/admin/manageResource" className="nav-link text-light">
+                    <Link
+                      to="/admin/manageResource"
+                      className="nav-link text-light"
+                    >
                       Resources
                     </Link>
                     <ul className="dropdown">
@@ -149,7 +150,10 @@ export default function AdminHeader() {
                     </ul>
                   </li>
                   <li className="">
-                    <Link to="/admin/viewBooking" className="nav-link text-light">
+                    <Link
+                      to="/admin/viewBooking"
+                      className="nav-link text-light"
+                    >
                       Booking
                     </Link>
                   </li>
@@ -158,7 +162,13 @@ export default function AdminHeader() {
                       Profile
                     </Link>
                   </li>
-                  
+                  <li className="">
+                    <button type="button" class="btn btn-sm btn-warning">
+                      <Link to="/admin" className="nav-link text-light" onClick={logout}>
+                        Logout
+                      </Link>
+                    </button>
+                  </li>
                 </ul>
               </nav>
             </div>
