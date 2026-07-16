@@ -136,10 +136,10 @@ export default function AddCareerPath() {
                     {programType === "Paid" ? (
                       <div className="form-group col-md-4">
                         <input
-                          type="text"
+                          type="number"
                           name="price"
                           className="form-control"
-                          placeholder="Price"
+                          placeholder="Price (in ₹)"
                           required="required"
                           value={price}
                           onChange={(e) => {

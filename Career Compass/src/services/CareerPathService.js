@@ -11,7 +11,7 @@ class CareerPathService {
     newCareerPath.programType = Data.programType;
 
     // newCareerPath.imageUrl = Data.imageUrl;
-    if (Data.porgramType === "paid") {
+    if (Data.programType === "Paid") {
       newCareerPath.price = Data.price;
     }
 
@@ -25,7 +25,7 @@ class CareerPathService {
     const querySnapshot = await getDocs(collection(db , dbPath));
     var careerPath = []
     querySnapshot.forEach((doc) => {
-      careerPath.push({ id: doc.id, ...doc.Data()})
+      careerPath.push({ id: doc.id, ...doc.data()})
     });
     return careerPath;
   }

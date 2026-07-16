@@ -68,7 +68,7 @@ export default function AdminHeader() {
                     </ul>
                   </li>
                   <li className="">
-                    <button type="button" class="btn btn-sm btn-warning">
+                    <button type="button" class="btn btn-sm btn-warning ms-3">
                       <Link to="/admin" className="nav-link text-light" onClick={logout}>
                         Logout
                       </Link>

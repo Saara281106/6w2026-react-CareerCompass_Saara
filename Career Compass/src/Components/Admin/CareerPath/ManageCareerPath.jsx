@@ -14,6 +14,7 @@ export default function ManageCareerPath() {
     try {
       setLoading(true);
       let res = await CareerPathService.all();
+      console.log(res);
       setCareerPath(res);
       setLoading(false);
     } catch (error) {
@@ -55,14 +56,14 @@ export default function ManageCareerPath() {
       <div className="container">
         <div className="text-end">
           <Link to="/admin/careerpath/add">
-            <button type="button" class="btn btn-sm btn-primary">
+            <button type="button" className="btn btn-warning text-light">
               {" "}
               + Career Path{" "}
             </button>
           </Link>
         </div>
         <br />
-        <table class="table table table-hover">
+        <table className="table table table-hover">
           <thead>
             <tr className="table">
               <th scope="col">#</th>
@@ -76,7 +77,24 @@ export default function ManageCareerPath() {
           </thead>
           <tbody>
             {
+              careerPath.map((careerPath , index) => (
+                <tr>
+              <td scope="row">{index + 1}</td>
+              <td scope="row">{careerPath.name}</td>
+              <td scope="row">{careerPath.description} </td>
+              <td scope="row">IMAGE</td>
+              <td scope="row">{careerPath.programType}</td>
+              <td scope="row">
+                {
+                  careerPath.programType === "Paid" ? <>₹{careerPath.price}</> : "Free"
+                }
+              </td>
+              <td scope="row"><button type="button" className="btn btn-sm btn-info">Edit</button>
               
+              <button type="button" className="btn btn-sm btn-danger ms-2">Delete</button></td>
+            </tr>
+
+              ))
             }
           </tbody>
         </table>
