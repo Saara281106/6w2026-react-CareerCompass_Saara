@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CareerPathService from "../../../services/CareerPathService";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-export default function AddCareerPath() {
+export default function EditCareerPath() {
   let [loading, setLoading] = useState(false);
+
+  const params = useParams();
+
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -12,6 +15,25 @@ export default function AddCareerPath() {
   const [programType, setProgramType] = useState("Free");
 
   const nav = useNavigate();
+
+  useEffect(() => {
+    getCareerPathDetails();
+  }, []);
+
+  async function getCareerPathDetails() {
+    try {
+      setLoading(true);
+      let res = await CareerPathService.single(params.id);
+      setName(res.name);
+      setDescription(res.description);
+      setPrice(res.price);
+      setProgramType(res.programType);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   async function submit(e) {
     e.preventDefault();
@@ -21,18 +43,20 @@ export default function AddCareerPath() {
       let payload = {
         name: name,
         description: description,
-        programType: programType
+        programType: programType,
       };
-      if(programType === "Paid"){
+      if (programType === "Paid") {
+        payload.price = price;
+      } else{
         payload.price = price;
       }
 
       console.log(payload);
 
-      await CareerPathService.add(payload);
+      await CareerPathService.update(params.id, payload);
 
       setLoading(false);
-      toast.success("Career Path Added");
+      toast.success("Career Path Updated Successfully");
       nav("/admin/careerpath/manage");
       setName("");
       setDescription("");
@@ -62,7 +86,7 @@ export default function AddCareerPath() {
           <div className="row">
             <div className="col-lg-12 col-sm-12 col-xs-12 text-center">
               <div className="section-top-title">
-                <h1>Add Career Path</h1>
+                <h1>Edit Career Path</h1>
               </div>
             </div>
             {/*- END COL */}
@@ -94,7 +118,6 @@ export default function AddCareerPath() {
                         name="name"
                         className="form-control"
                         placeholder="Name"
-                        required="required"
                         value={name}
                         onChange={(e) => {
                           setName(e.target.value);
@@ -108,7 +131,6 @@ export default function AddCareerPath() {
                         name="message"
                         className="form-control"
                         placeholder="Description"
-                        required="required"
                         value={description}
                         onChange={(e) => {
                           setDescription(e.target.value);
@@ -138,7 +160,6 @@ export default function AddCareerPath() {
                           name="price"
                           className="form-control"
                           placeholder="Price (in ₹)"
-                          required="required"
                           value={price}
                           onChange={(e) => {
                             setPrice(e.target.value);
@@ -159,7 +180,7 @@ export default function AddCareerPath() {
                         className="contact_btn"
                         title="Submit Your Message!"
                       >
-                        {loading ? "Adding Path..." : "Submit"}
+                        {loading ? "Updating..." : "Update"}
                       </button>
                     </div>
                   </div>

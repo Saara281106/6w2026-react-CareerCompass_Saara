@@ -22,6 +22,7 @@ import Profile from "./Components/Admin/Profile/profile";
 import Register from "./auth/Register";
 import { ToastContainer } from "react-toastify";
 import Login from "./auth/Login";
+import EditCareerpath from "./Components/Admin/CareerPath/EditCareerPath";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
             <Route index element={<AdminDashboard/>} />
             <Route path="careerpath/manage" element={<ManageCareerPath/>} />
             <Route path="careerpath/add" element={<AddCareerPath/>} />
+            <Route path="careerpath/edit/:id" element={<EditCareerpath/>} />
             <Route path="manageMentorshipSession" element={<ManageMentorshipSession/>} />
             <Route path="addMentorshipSession" element={<AddMentorshipSession/>} />
             <Route path="manageResource" element={<ManageResources/>} />

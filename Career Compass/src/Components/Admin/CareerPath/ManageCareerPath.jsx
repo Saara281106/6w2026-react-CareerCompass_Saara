@@ -24,6 +24,18 @@ export default function ManageCareerPath() {
     }
   }
 
+  async function deleteCareerPath(id) {
+    try {
+      setLoading(true);
+      let res = await CareerPathService.delete(id);
+      getAllCareerPath();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <>
       {/* START SECTION TOP */}
@@ -76,26 +88,39 @@ export default function ManageCareerPath() {
             </tr>
           </thead>
           <tbody>
-            {
-              careerPath.map((careerPath , index) => (
-                <tr>
-              <td scope="row">{index + 1}</td>
-              <td scope="row">{careerPath.name}</td>
-              <td scope="row">{careerPath.description} </td>
-              <td scope="row">IMAGE</td>
-              <td scope="row">{careerPath.programType}</td>
-              <td scope="row">
-                {
-                  careerPath.programType === "Paid" ? <>₹{careerPath.price}</> : "Free"
-                }
-              </td>
-              <td scope="row"><button type="button" className="btn btn-sm btn-info">Edit</button>
-              
-              <button type="button" className="btn btn-sm btn-danger ms-2">Delete</button></td>
-            </tr>
+            {careerPath.map((careerPath, index) => (
+              <tr>
+                <td scope="row">{index + 1}</td>
+                <td scope="row">{careerPath.name}</td>
+                <td scope="row">{careerPath.description} </td>
+                <td scope="row">IMAGE</td>
+                <td scope="row">{careerPath.programType}</td>
+                <td scope="row">
+                  {careerPath.programType === "Paid" ? (
+                    <>₹{careerPath.price}</>
+                  ) : (
+                    "₹0"
+                  )}
+                </td>
+                <td scope="row">
+                  <Link to={`/admin/careerpath/edit/${careerPath.id}`}>
+                    <button type="button" className="btn btn-sm btn-info">
+                      Edit
+                    </button>
+                  </Link>
 
-              ))
-            }
+                  <button
+                    type="button"
+                    className="btn btn-sm btn-danger ms-2"
+                    onClick={() => {
+                      deleteCareerPath(careerPath.id);
+                    }}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
