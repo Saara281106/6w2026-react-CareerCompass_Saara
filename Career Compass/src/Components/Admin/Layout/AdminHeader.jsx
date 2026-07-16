@@ -56,16 +56,15 @@ export default function AdminHeader() {
                     </Link>
                     <ul className="dropdown">
                       <li>
-                        <Link to="/admin/careerpath/add" className="nav-link">
-                         Add Carrier Paths
-                        </Link>
-                      </li>
-                      <li>
                         <Link to="/admin/careerpath/manage" className="nav-link">
                          Manage Career Paths
                         </Link>
                       </li>
-                     
+                      <li>
+                        <Link to="/admin/careerpath/add" className="nav-link">
+                         Add Career Paths
+                        </Link>
+                      </li>
                     </ul>
                   </li>
                   <li className="">

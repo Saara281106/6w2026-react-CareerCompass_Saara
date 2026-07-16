@@ -9,13 +9,17 @@ class CareerPathService {
     newCareerPath.name = Data.name;
     newCareerPath.description = Data.description;
     newCareerPath.programType = Data.programType;
-    newCareerPath.price = Data.price;
-    newCareerPath.imageUrl = Data.imageUrl;
-    
-    const docRef = await addDoc(collection(db , dbPath), {
-      ...newCareerPath
+
+    // newCareerPath.imageUrl = Data.imageUrl;
+    if (Data.porgramType === "paid") {
+      newCareerPath.price = Data.price;
+    }
+
+    const docRef = await addDoc(collection(db, dbPath), {
+      ...newCareerPath,
     });
+    return CareerPath;
   }
 }
 
-export default new CareerPathService()
+export default new CareerPathService();

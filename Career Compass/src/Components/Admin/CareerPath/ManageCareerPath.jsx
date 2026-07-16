@@ -16,9 +16,9 @@ export default function ManageCareerPath() {
           <div className="row">
             <div className="col-lg-12 col-sm-12 col-xs-12 text-center">
               <div className="section-top-title">
-                <h1>Career Paths</h1>
+                <h1>Manage Career Paths</h1>
               </div>
-            </div>
+            </div> 
             {/*- END COL */}
           </div>
           {/*- END ROW */}
@@ -32,7 +32,7 @@ export default function ManageCareerPath() {
       <br />
       <div className="container">
         <div className="text-end">
-          <Link to="/admin/addCareerPath" >
+          <Link to="/admin/careerpath/add" >
             <button type="button" class="btn btn-sm btn-primary">
               {" "}
               + Career Path{" "}
@@ -40,9 +40,9 @@ export default function ManageCareerPath() {
           </Link>
         </div>
         <br />
-        <table class="table table-warning table-hover">
+        <table class="table table table-hover">
           <thead>
-            <tr className="table-primary">
+            <tr className="table">
               <th scope="col">#</th>
               <th scope="col">Name</th>
               <th scope="col">Description</th>

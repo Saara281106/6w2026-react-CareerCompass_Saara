@@ -1,12 +1,52 @@
 import { useState } from "react";
+import CareerPathService from "../../../services/CareerPathService";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function AddCareerPath() {
-  
-  const [name , setName] = useState("");
-  const [description , setDescription] = useState("");
-  const [price , setPrice] = useState("");
-  
-  
+  let [loading, setLoading] = useState(false);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [image, setImage] = useState("");
+  const [programType, setProgramType] = useState("Free");
+
+  const nav = useNavigate();
+
+  async function submit(e) {
+    e.preventDefault();
+    try {
+      setLoading(true);
+
+      let payload = {
+        name: name,
+        description: description,
+        programType: programType
+      };
+      if(programType === "Paid"){
+        payload.price = price;
+      }
+
+      console.log(payload);
+
+      await CareerPathService.add(payload);
+
+      setLoading(false);
+      toast.success("Career Path Added");
+      nav("/admin/careerpath/manage");
+      setName("");
+      setDescription("");
+      setProgramType("");
+      setPrice("");
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+      toast.error(error.code);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <>
       {/* START SECTION TOP */}
@@ -18,7 +58,6 @@ export default function AddCareerPath() {
           backgroundPosition: "center center",
         }}
       >
-        
         <div className="container">
           <div className="row">
             <div className="col-lg-12 col-sm-12 col-xs-12 text-center">
@@ -33,11 +72,12 @@ export default function AddCareerPath() {
         {/*- END CONTAINER */}
       </section>
       {/* END SECTION TOP */}
-      <br /><br /><br />
+      <br />
+      <br />
+      <br />
       {/* CONTACT */}
       <div id="contact" className="contact_area section-padding container">
         <div className="container">
-          
           <div className="row">
             <div className="offset-lg-1 col-lg-10 col-sm-12 col-xs-12 text-center wow fadeInUp">
               <div className="contact">
@@ -45,6 +85,7 @@ export default function AddCareerPath() {
                   id="contact-form"
                   method="post"
                   encType="multipart/form-data"
+                  onSubmit={submit}
                 >
                   <div className="row">
                     <div className="form-group col-md-12">
@@ -54,18 +95,13 @@ export default function AddCareerPath() {
                         className="form-control"
                         placeholder="Name"
                         required="required"
+                        value={name}
+                        onChange={(e) => {
+                          setName(e.target.value);
+                        }}
                       />
                     </div>
-                    {/* <div className="form-group col-md-12">
-                      <input
-                        type="number"
-                        name="programType"
-                        className="form-control"
-                        placeholder="Price"
-                        required="required"
-                      />
-                    </div> */}
-                    
+
                     <div className="form-group col-md-12">
                       <textarea
                         rows={6}
@@ -74,26 +110,47 @@ export default function AddCareerPath() {
                         placeholder="Description"
                         required="required"
                         defaultValue={""}
+                        value={description}
+                        onChange={(e) => {
+                          setDescription(e.target.value);
+                        }}
                       />
                     </div>
-                    <div className="form-group col-md-6">
-                      <input
-                        type="text"
-                        name="price"
-                        className="form-control"
-                        placeholder="Price"
-                        required="required"
-                      />
+
+                    <div className="form-group col-md-4">
+                      <select
+                        name=""
+                        id=""
+                        value={programType}
+                        onChange={(e) => {
+                          setProgramType(e.target.value);
+                        }}
+                        style={{ height: "70px", width: "350px" }}
+                      >
+                        placeholder="Type"
+                        <option value="Free">Free</option>
+                        <option value="Paid">Paid</option>
+                      </select>
                     </div>
-                    <div className="form-group col-md-6">
-                      
-                       <select name="" id="" 
-                       style={{height : '70px', width : '500px' }}>
-                        <option value="" disabled select>Type</option>
-                         <option value="">Paid</option>
-                         <option value="">Free</option>
-                       </select>
-                      
+
+                    {programType === "Paid" ? (
+                      <div className="form-group col-md-4">
+                        <input
+                          type="text"
+                          name="price"
+                          className="form-control"
+                          placeholder="Price"
+                          required="required"
+                          value={price}
+                          onChange={(e) => {
+                            setPrice(e.target.value);
+                          }}
+                        />
+                      </div>
+                    ) : null}
+
+                    <div className="form-group col-md-4">
+                      <input type="file" />
                     </div>
                     <div className="col-md-12 text-center">
                       <button
@@ -104,7 +161,7 @@ export default function AddCareerPath() {
                         className="contact_btn"
                         title="Submit Your Message!"
                       >
-                        Send Message
+                        {loading ? "Adding Path..." : "Submit"}
                       </button>
                     </div>
                   </div>
