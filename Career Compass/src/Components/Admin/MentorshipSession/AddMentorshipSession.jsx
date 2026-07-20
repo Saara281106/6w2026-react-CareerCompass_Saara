@@ -1,4 +1,62 @@
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import MentorshipSessionService from "../../../services/MentorshipSessionService";
+
 export default function AddMentorshipSession() {
+  let [loading, setLoading] = useState(false);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [mentorName, setMentorName] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [duration, setDuration] = useState("");
+  const [meetingLink, setMeetingLink] = useState("");
+  const [Status, setStatus] = useState("Available");
+
+
+  const nav = useNavigate();
+
+  async function submit(e) {
+    e.preventDefault();
+    try {
+      setLoading(true);
+
+      let payload = {
+        title: title,
+        description: description,
+        mentorName: mentorName,
+        date: date,
+        time: time,
+        duration: duration,
+        meetingLink: meetingLink,
+        status: status
+      };
+
+      console.log(payload);
+
+      await MentorshipSessionService.add(payload);
+
+      setLoading(false);
+      toast.success("Mentorship Session Added Successfully");
+      nav("/admin/mentorshipSession/manage");
+      setTitle("");
+      setDescription("");
+      setMentorname("");
+      setDate("");
+      setTime("");
+      setDuration("");
+      setMeetingLink("");
+      setStatus("");
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+      toast.error(error.code);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <>
       {/* START SECTION TOP */}
@@ -14,7 +72,7 @@ export default function AddMentorshipSession() {
           <div className="row">
             <div className="col-lg-12 col-sm-12 col-xs-12 text-center">
               <div className="section-top-title">
-                <h1>Add Mentorship Session</h1>
+                <h1>Add Career Path</h1>
               </div>
             </div>
             {/*- END COL */}
@@ -24,9 +82,9 @@ export default function AddMentorshipSession() {
         {/*- END CONTAINER */}
       </section>
       {/* END SECTION TOP */}
-
-      <br /><br /><br />
-
+      <br />
+      <br />
+      <br />
       {/* CONTACT */}
       <div id="contact" className="contact_area section-padding container">
         <div className="container">
@@ -37,26 +95,36 @@ export default function AddMentorshipSession() {
                   id="contact-form"
                   method="post"
                   encType="multipart/form-data"
+                  onSubmit={submit}
                 >
                   <div className="row">
-                    <div className="form-group col-md-12">
+                    <div className="form-group col-md-6">
                       <input
                         type="text"
-                        name="name"
+                        name="title"
                         className="form-control"
-                        placeholder="Name"
+                        placeholder="Title"
                         required="required"
+                        value={title}
+                        onChange={(e) => {
+                          setTitle(e.target.value);
+                        }}
                       />
                     </div>
-                    {/* <div className="form-group col-md-12">
+
+                    <div className="form-group col-md-6">
                       <input
-                        type="number"
-                        name="programType"
+                        type="text"
+                        name="mentor"
                         className="form-control"
-                        placeholder="Price"
+                        placeholder="Mentor"
                         required="required"
+                        value={mentorName}
+                        onChange={(e) => {
+                          setMentorName(e.target.value);
+                        }}
                       />
-                    </div> */}
+                    </div>
 
                     <div className="form-group col-md-12">
                       <textarea
@@ -65,30 +133,71 @@ export default function AddMentorshipSession() {
                         className="form-control"
                         placeholder="Description"
                         required="required"
-                        defaultValue={""}
+                        value={description}
+                        onChange={(e) => {
+                          setDescription(e.target.value);
+                        }}
                       />
                     </div>
-                    <div className="form-group col-md-6">
-                      <input
-                        type="text"
-                        name="price"
-                        className="form-control"
-                        placeholder="Price"
-                        required="required"
-                      />
-                    </div>
-                    <div className="form-group col-md-6">
-                      <select
-                        name=""
-                        id=""
-                        style={{ height: "70px", width: "500px" }}
-                      >
-                        <option value="" disabled select>
-                          Type
-                        </option>
-                        <option value="">Paid</option>
-                        <option value="">Free</option>
-                      </select>
+
+                    <div className="form-group col-md-4">
+                        <input
+                          type="number"
+                          name="date"
+                          className="form-control"
+                          placeholder="Date for session"
+                          required="required"
+                          value={date}
+                          onChange={(e) => {
+                            setDate(e.target.value);
+                          }}
+                        />
+                      </div>
+
+                      <div className="form-group col-md-4">
+                        <input
+                          type="number"
+                          name="time"
+                          className="form-control"
+                          placeholder="Time for session"
+                          required="required"
+                          value={time}
+                          onChange={(e) => {
+                            setTime(e.target.value);
+                          }}
+                        />
+                      </div>
+
+                      <div className="form-group col-md-4">
+                        <input
+                          type="number"
+                          name="duration"
+                          className="form-control"
+                          placeholder="Duration for session"
+                          required="required"
+                          value={duration}
+                          onChange={(e) => {
+                            setDuration(e.target.value);
+                          }}
+                        />
+                      </div>
+
+                      <div className="form-group col-md-12">
+                        <input
+                          type="number"
+                          name="link"
+                          className="form-control"
+                          placeholder="Meeting Link"
+                          required="required"
+                          value={meetingLink}
+                          onChange={(e) => {
+                            setMeetingLink(e.target.value);
+                          }}
+                        />
+                      </div>
+
+                    <div className="form-group col-md-4">
+                      <input type="file" />
                     </div>
                     <div className="col-md-12 text-center">
                       <button
@@ -99,7 +208,7 @@ export default function AddMentorshipSession() {
                         className="contact_btn"
                         title="Submit Your Message!"
                       >
-                        Send Message
+                        {loading ? "Adding Session..." : "Submit"}
                       </button>
                     </div>
                   </div>
@@ -113,7 +222,6 @@ export default function AddMentorshipSession() {
         {/*- END CONTAINER */}
       </div>
       {/* END CONTACT */}
-
       <br />
       <br />
       <br />

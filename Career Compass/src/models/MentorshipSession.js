@@ -6,7 +6,7 @@ export class MentorshipSession {
   sessionTime = ""
   duration = ""
   meetingLink = ""
-  sessionStatus = "Available/Completed/Cancelled"
+  sessionStatus = "Available"; //Available/Completed/Cancelled
   createdAt = ""
 }
 

@@ -1,6 +1,41 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import MentorshipSessionService from "../../../services/MentorshipSessionService";
 
 export default function ManageMentorshipSession() {
+  let [loading, setLoading] = useState(false);
+
+  const [mentorshipSession, setMentorshipSession] = useState([]);
+  useEffect(() => {
+    getAllMentorshipSession();
+  }, []);
+
+  async function getAllMentorshipSession() {
+    try {
+      setLoading(true);
+      let res = await MentorshipSessionService.all();
+      console.log(res);
+      setMentorshipSession(res);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function deleteMentorshipSession(id) {
+    try {
+      setLoading(true);
+      let res = await MentorshipSessionService.delete(id);
+      getAllMentorshipSession();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <>
       {/* START SECTION TOP */}
@@ -16,7 +51,7 @@ export default function ManageMentorshipSession() {
           <div className="row">
             <div className="col-lg-12 col-sm-12 col-xs-12 text-center">
               <div className="section-top-title">
-                <h1>Mentorship Session</h1>
+                <h1>Manage Career Paths</h1>
               </div>
             </div>
             {/*- END COL */}
@@ -32,42 +67,61 @@ export default function ManageMentorshipSession() {
       <br />
       <div className="container">
         <div className="text-end">
-          <Link to="/admin/addMentorshipSession" >
-            <button type="button" class="btn btn-sm btn-primary">
+          <Link to="/admin/careerpath/add">
+            <button type="button" className="btn btn-warning text-light">
               {" "}
               + Session{" "}
             </button>
           </Link>
         </div>
         <br />
-        <table class="table table-warning table-hover">
+        <table className="table table table-hover">
           <thead>
-            <tr className="table-primary">
+            <tr className="table">
               <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
+              <th scope="col">Title</th>
+              <th scope="col">Description</th>
+              <th scope="col">Mentor</th>
+              <th scope="col">Date</th>
+              <th scope="col">Time</th>
+              <th scope="col">Duration</th>
+              <th scope="col">MeetingLink</th>
+              <th scope="col">Status</th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>John</td>
-              <td>Doe</td>
-              <td>@social</td>
-            </tr>
+            {mentorshipSession.map((mentorshipSession, index) => (
+              <tr>
+                <td scope="row">{index + 1}</td>
+                <td scope="row">{mentorshipSession.title}</td>
+                <td scope="row">{mentorshipSession.description} </td>
+                <td scope="row">{mentorshipSession.mentor} </td>
+                <td scope="row">{mentorshipSession.date}</td>
+                <td scope="row">{mentorshipSession.time}</td>
+                <td scope="row">{mentorshipSession.dueration}</td>
+                <td scope="row">{mentorshipSession.meetingLink}</td>
+                <td scope="row">{mentorshipSession.status}</td>
+              
+                <td scope="row">
+                  <Link to={`/admin/mentorshipSession/edit/${mentorshipSession.id}`}>
+                    <button type="button" className="btn btn-sm btn-info">
+                      Edit
+                    </button>
+                  </Link>
+
+                  <button
+                    type="button"
+                    className="btn btn-sm btn-danger ms-2"
+                    onClick={() => {
+                      deleteMentorshipSession(mentorshipSession.id);
+                    }}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
