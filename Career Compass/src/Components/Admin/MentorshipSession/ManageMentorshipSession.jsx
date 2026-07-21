@@ -75,7 +75,7 @@ export default function ManageMentorshipSession() {
           </Link>
         </div>
         <br />
-        <table className="table table table-hover">
+        <table className="table table table-hover table-bordered">
           <thead>
             <tr className="table">
               <th scope="col">#</th>

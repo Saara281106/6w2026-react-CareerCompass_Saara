@@ -2,6 +2,7 @@ import { useState } from "react";
 import CareerPathService from "../../../services/CareerPathService";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import CloudinaryService from "../../../services/CloudinaryService";
 
 export default function AddCareerPath() {
   let [loading, setLoading] = useState(false);
@@ -18,12 +19,17 @@ export default function AddCareerPath() {
     try {
       setLoading(true);
 
+      if (image) {
+        var imageUrl = await CloudinaryService.upload(image);
+      }
+
       let payload = {
         name: name,
         description: description,
-        programType: programType
+        programType: programType,
+        imageUrl: imageUrl,
       };
-      if(programType === "Paid"){
+      if (programType === "Paid") {
         payload.price = price;
       }
 
@@ -148,7 +154,12 @@ export default function AddCareerPath() {
                     ) : null}
 
                     <div className="form-group col-md-4">
-                      <input type="file" />
+                      <input
+                        type="file"
+                        onChange={(e) => {
+                          setImage(e.target.files[0]);
+                        }}
+                      />
                     </div>
                     <div className="col-md-12 text-center">
                       <button

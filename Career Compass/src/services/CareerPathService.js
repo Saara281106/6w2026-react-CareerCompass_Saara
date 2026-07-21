@@ -10,6 +10,7 @@ class CareerPathService {
     newCareerPath.name = Data.name;
     newCareerPath.description = Data.description;
     newCareerPath.programType = Data.programType;
+    newCareerPath.imageUrl = Data.imageUrl;
 
     // newCareerPath.imageUrl = Data.imageUrl;
     if (Data.programType === "Paid") {

@@ -75,7 +75,7 @@ export default function ManageCareerPath() {
           </Link>
         </div>
         <br />
-        <table className="table table table-hover">
+        <table className="table table table-hover table-bordered">
           <thead>
             <tr className="table">
               <th scope="col">#</th>
@@ -93,7 +93,17 @@ export default function ManageCareerPath() {
                 <td scope="row">{index + 1}</td>
                 <td scope="row">{careerPath.name}</td>
                 <td scope="row">{careerPath.description} </td>
-                <td scope="row">IMAGE</td>
+                <td scope="row">
+                  <img
+                    src={careerPath.imageUrl}
+                    style={{
+                      height: "100px",
+                      width: "100px",
+                      // borderRadius: "50%",
+                    }}
+                    alt=""
+                  />
+                </td>
                 <td scope="row">{careerPath.programType}</td>
                 <td scope="row">
                   {careerPath.programType === "Paid" ? (
