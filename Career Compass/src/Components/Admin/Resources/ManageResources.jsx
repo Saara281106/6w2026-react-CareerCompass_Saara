@@ -1,6 +1,41 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import CareerPathService from "../../../services/CareerPathService";
 
-export default function ManageResources() {
+export default function ManageCareerPath() {
+  let [loading, setLoading] = useState(false);
+
+  const [careerPath, setCareerPath] = useState([]);
+  useEffect(() => {
+    getAllCareerPath();
+  }, []);
+
+  async function getAllCareerPath() {
+    try {
+      setLoading(true);
+      let res = await CareerPathService.all();
+      console.log(res);
+      setCareerPath(res);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function deleteCareerPath(id) {
+    try {
+      setLoading(true);
+      let res = await CareerPathService.delete(id);
+      getAllCareerPath();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <>
       {/* START SECTION TOP */}
@@ -16,7 +51,7 @@ export default function ManageResources() {
           <div className="row">
             <div className="col-lg-12 col-sm-12 col-xs-12 text-center">
               <div className="section-top-title">
-                <h1>Resource</h1>
+                <h1>Manage Career Paths</h1>
               </div>
             </div>
             {/*- END COL */}
@@ -32,42 +67,70 @@ export default function ManageResources() {
       <br />
       <div className="container">
         <div className="text-end">
-          <Link to="/admin/addResource" >
-            <button type="button" class="btn btn-sm btn-primary">
+          <Link to="/admin/careerpath/add">
+            <button type="button" className="btn btn-warning text-light">
               {" "}
-              + Resource{" "}
+              + Career Path{" "}
             </button>
           </Link>
         </div>
         <br />
-        <table class="table table-warning table-hover">
+        <table className="table table table-hover table-bordered">
           <thead>
-            <tr className="table-primary">
+            <tr className="table">
               <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
+              <th scope="col">Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Image</th>
+              <th scope="col">Type</th>
+              <th scope="col">Price</th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>John</td>
-              <td>Doe</td>
-              <td>@social</td>
-            </tr>
+            {careerPath.map((careerPath, index) => (
+              <tr>
+                <td scope="row">{index + 1}</td>
+                <td scope="row">{careerPath.name}</td>
+                <td scope="row">{careerPath.description} </td>
+                <td scope="row">
+                  <img
+                    src={careerPath.imageUrl}
+                    style={{
+                      height: "100px",
+                      width: "100px",
+                      // borderRadius: "50%",
+                    }}
+                    alt=""
+                  />
+                </td>
+                <td scope="row">{careerPath.programType}</td>
+                <td scope="row">
+                  {careerPath.programType === "Paid" ? (
+                    <>₹{careerPath.price}</>
+                  ) : (
+                    "₹0"
+                  )}
+                </td>
+                <td scope="row">
+                  <Link to={`/admin/careerpath/edit/${careerPath.id}`}>
+                    <button type="button" className="btn btn-sm btn-info">
+                      Edit
+                    </button>
+                  </Link>
+
+                  <button
+                    type="button"
+                    className="btn btn-sm btn-danger ms-2"
+                    onClick={() => {
+                      deleteCareerPath(careerPath.id);
+                    }}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
