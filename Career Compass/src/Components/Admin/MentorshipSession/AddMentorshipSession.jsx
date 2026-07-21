@@ -42,7 +42,7 @@ export default function AddMentorshipSession() {
       nav("/admin/mentorshipSession/manage");
       setTitle("");
       setDescription("");
-      setMentorname("");
+      setMentorName("");
       setDate("");
       setTime("");
       setDuration("");
@@ -72,7 +72,7 @@ export default function AddMentorshipSession() {
           <div className="row">
             <div className="col-lg-12 col-sm-12 col-xs-12 text-center">
               <div className="section-top-title">
-                <h1>Add Career Path</h1>
+                <h1>Add Mentorship Session</h1>
               </div>
             </div>
             {/*- END COL */}
@@ -142,7 +142,7 @@ export default function AddMentorshipSession() {
 
                     <div className="form-group col-md-4">
                         <input
-                          type="number"
+                          type="date"
                           name="date"
                           className="form-control"
                           placeholder="Date for session"
@@ -156,7 +156,7 @@ export default function AddMentorshipSession() {
 
                       <div className="form-group col-md-4">
                         <input
-                          type="number"
+                          type="time"
                           name="time"
                           className="form-control"
                           placeholder="Time for session"
@@ -173,7 +173,7 @@ export default function AddMentorshipSession() {
                           type="number"
                           name="duration"
                           className="form-control"
-                          placeholder="Duration for session"
+                          placeholder="Duration (in min)"
                           required="required"
                           value={duration}
                           onChange={(e) => {
@@ -184,7 +184,7 @@ export default function AddMentorshipSession() {
 
                       <div className="form-group col-md-12">
                         <input
-                          type="number"
+                          type="text"
                           name="link"
                           className="form-control"
                           placeholder="Meeting Link"
@@ -196,9 +196,6 @@ export default function AddMentorshipSession() {
                         />
                       </div>
 
-                    <div className="form-group col-md-4">
-                      <input type="file" />
-                    </div>
                     <div className="col-md-12 text-center">
                       <button
                         type="submit"

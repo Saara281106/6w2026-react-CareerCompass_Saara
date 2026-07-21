@@ -67,6 +67,26 @@ export default function AdminHeader() {
                       </li>
                     </ul>
                   </li>
+                  <li className="has-children">
+                    <Link
+                      
+                      className="nav-link text-light"
+                    >
+                      Mentorship
+                    </Link>
+                    <ul className="dropdown">
+                      <li>
+                        <Link to="/admin/mentorshipSession/manage" className="nav-link">
+                         Manage Mentorship Session
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/admin/MentorshipSession/add" className="nav-link">
+                         Add Mentorship Session
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
                   <li className="">
                     <button type="button" class="btn btn-sm btn-warning ms-3">
                       <Link to="/admin" className="nav-link text-light" onClick={logout}>

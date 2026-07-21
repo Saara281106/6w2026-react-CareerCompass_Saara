@@ -23,6 +23,7 @@ import Register from "./auth/Register";
 import { ToastContainer } from "react-toastify";
 import Login from "./auth/Login";
 import EditCareerpath from "./Components/Admin/CareerPath/EditCareerPath";
+import EditMentorshipSession from "./Components/Admin/MentorshipSession/EditMentorshipSession";
 
 function App() {
   return (
@@ -48,10 +49,11 @@ function App() {
             <Route path="careerpath/manage" element={<ManageCareerPath/>} />
             <Route path="careerpath/add" element={<AddCareerPath/>} />
             <Route path="careerpath/edit/:id" element={<EditCareerpath/>} />
-            <Route path="manageMentorshipSession" element={<ManageMentorshipSession/>} />
-            <Route path="addMentorshipSession" element={<AddMentorshipSession/>} />
-            <Route path="manageResource" element={<ManageResources/>} />
-            <Route path="addResource" element={<AddResources/>} />
+            <Route path="mentorshipSession/manage" element={<ManageMentorshipSession/>} />
+            <Route path="mentorshipSession/add" element={<AddMentorshipSession/>} />
+            <Route path="mentorshipSession/edit/:id" element={<EditMentorshipSession/>} />
+            <Route path="resources/manage" element={<ManageResources/>} />
+            <Route path="resources/add" element={<AddResources/>} />
             <Route path="viewBooking" element={<ViewBooking/>} />
             <Route path="profile" element={<Profile/>} />
           </Route>

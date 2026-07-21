@@ -2,11 +2,11 @@ export class MentorshipSession {
   title = ""
   description = ""
   mentorName = ""
-  sessionDate = ""
-  sessionTime = ""
+  date = ""
+  time = ""
   duration = ""
   meetingLink = ""
-  sessionStatus = "Available"; //Available/Completed/Cancelled
+  status = "Available"; //Available/Completed/Cancelled
   createdAt = ""
 }
 

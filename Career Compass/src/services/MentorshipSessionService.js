@@ -1,6 +1,7 @@
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc, getDoc } from "firebase/firestore";
 import { db } from "../Firebase";
 import { MentorshipSession } from "../models/MentorshipSession";
+import { toast } from "react-toastify";
 const dbPath = "mentorshipSession";
 
 class MentorshipSessionService {
@@ -9,9 +10,9 @@ class MentorshipSessionService {
     newMentorshipSession.title = Data.title;
     newMentorshipSession.description = Data.description;
     newMentorshipSession.mentorName = Data.mentorName;
-    newMentorshipSession.sessionStatus = Data.sessionStatus;
-    newMentorshipSession.sessionDate = Data.sessionDate;
-    newMentorshipSession.sessionTime = Data.sessionTime;
+    newMentorshipSession.status = Data.status;
+    newMentorshipSession.date = Data.date;
+    newMentorshipSession.time = Data.time;
     newMentorshipSession.duration = Data.duration;
     newMentorshipSession.meetingLink = Data.meetingLink;
 

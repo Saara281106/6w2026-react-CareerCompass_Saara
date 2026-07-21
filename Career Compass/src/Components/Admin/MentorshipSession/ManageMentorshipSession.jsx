@@ -51,7 +51,7 @@ export default function ManageMentorshipSession() {
           <div className="row">
             <div className="col-lg-12 col-sm-12 col-xs-12 text-center">
               <div className="section-top-title">
-                <h1>Manage Career Paths</h1>
+                <h1>Manage Mentorship Session</h1>
               </div>
             </div>
             {/*- END COL */}
@@ -67,7 +67,7 @@ export default function ManageMentorshipSession() {
       <br />
       <div className="container">
         <div className="text-end">
-          <Link to="/admin/careerpath/add">
+          <Link to="/admin/mentorshipSession/add">
             <button type="button" className="btn btn-warning text-light">
               {" "}
               + Session{" "}
@@ -96,23 +96,23 @@ export default function ManageMentorshipSession() {
                 <td scope="row">{index + 1}</td>
                 <td scope="row">{mentorshipSession.title}</td>
                 <td scope="row">{mentorshipSession.description} </td>
-                <td scope="row">{mentorshipSession.mentor} </td>
+                <td scope="row">{mentorshipSession.mentorName} </td>
                 <td scope="row">{mentorshipSession.date}</td>
                 <td scope="row">{mentorshipSession.time}</td>
-                <td scope="row">{mentorshipSession.dueration}</td>
-                <td scope="row">{mentorshipSession.meetingLink}</td>
-                <td scope="row">{mentorshipSession.status}</td>
+                <td scope="row">{mentorshipSession.duration}</td>
+                <td scope="row"><a href="">{mentorshipSession.meetingLink}</a></td>
+                <td scope="row">{mentorshipSession.status}Available</td>
               
                 <td scope="row">
                   <Link to={`/admin/mentorshipSession/edit/${mentorshipSession.id}`}>
                     <button type="button" className="btn btn-sm btn-info">
-                      Edit
+                      Update
                     </button>
                   </Link>
-
+                  
                   <button
                     type="button"
-                    className="btn btn-sm btn-danger ms-2"
+                    className="btn btn-sm btn-danger "
                     onClick={() => {
                       deleteMentorshipSession(mentorshipSession.id);
                     }}
