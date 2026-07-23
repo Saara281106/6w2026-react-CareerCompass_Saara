@@ -5,7 +5,7 @@ export class Users {
   phone = "";
   address = "";
   profileImage = "";
-  userType = "admin/student";
+  userType = "student";
   status = true;
   createdAt = Date.now();
 }

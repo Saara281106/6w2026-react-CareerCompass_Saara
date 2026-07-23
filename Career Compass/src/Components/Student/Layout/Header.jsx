@@ -68,37 +68,32 @@ export default function Header() {
 
                     {email ? (
                       <li>
-                        
-                          <Link
-                            className="nav-link text-light"
-                            to="/mentorshipSession"
-                          >
-                            Mentorship Sessions
-                          </Link>
-                        
+                        <Link
+                          className="nav-link text-light"
+                          to="/mentorshipSession"
+                        >
+                          Mentorship Sessions
+                        </Link>
                       </li>
-                    ) : (
-                      null
-                    )}
+                    ) : null}
 
                     {email ? (
                       <li>
-                        
-                          <Link
-                            className="nav-link text-light"
-                            to="/resources"
-                          >
-                            Resources
-                          </Link>
-                        
+                        <Link className="nav-link text-light" to="/resources">
+                          Resources
+                        </Link>
                       </li>
-                    ) : (
-                      null
-                    )}
+                    ) : null}
 
                     <li>
                       <Link className="text-light" to="/contact">
                         Contact
+                      </Link>
+                    </li>
+
+                    <li>
+                      <Link className="nav-link text-light" to="/profile">
+                        Profile
                       </Link>
                     </li>
                     {email ? (
@@ -125,9 +120,12 @@ export default function Header() {
                             </Link>
                           </button>
                         </li>
-                        
+
                         <li>
-                          <button type="button" class="btn btn-sm btn-warning ms-3">
+                          <button
+                            type="button"
+                            class="btn btn-sm btn-warning ms-3"
+                          >
                             <Link className="nav-link text-light" to="/login">
                               Login
                             </Link>

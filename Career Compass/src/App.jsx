@@ -16,7 +16,6 @@ import ManageMentorshipSession from "./Components/Admin/MentorshipSession/Manage
 import ManageResources from "./Components/Admin/Resources/ManageResources";
 import AddResources from "./Components/Admin/Resources/AddResources";
 import ViewBooking from "./Components/Admin/Booking/ViewBooking";
-import Profile from "./Components/Admin/Profile/profile";
 import Register from "./auth/Register";
 import { ToastContainer } from "react-toastify";
 import Login from "./auth/Login";
@@ -26,6 +25,7 @@ import EditResource from "./Components/Admin/Resources/EditResources";
 import CareerPath from "./Components/Student/Pages/CareerPath";
 import MentorshipSessions from "./Components/Student/Pages/MentorshipSessions";
 import Resources from "./Components/Student/Pages/Resources";
+import Profile from "./Components/Student/Pages/Profile";
 
 function App() {
   return (
@@ -43,6 +43,7 @@ function App() {
             <Route path="/register" element={<Register/>}></Route>
             <Route path="/login" element={<Login/>}></Route>
             <Route path="/resources" element={<Resources/>}></Route>
+            <Route path="/profile" element={<Profile/>}></Route>
           </Route>
           {/* Student Routes Ends */}
 
