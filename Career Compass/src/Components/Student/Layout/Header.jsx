@@ -102,11 +102,14 @@ export default function Header() {
                       </Link>
                     </li>
 
-                    <li>
-                      <Link className="nav-link text-light" to="/profile">
-                        Profile
-                      </Link>
-                    </li>
+                    {email ? (
+                      <li>
+                        <Link className="nav-link text-light" to="/profile">
+                          Profile
+                        </Link>
+                      </li>
+                    ) : null}
+
                     {email ? (
                       <li>
                         <button type="button" class="btn btn-sm btn-warning">
