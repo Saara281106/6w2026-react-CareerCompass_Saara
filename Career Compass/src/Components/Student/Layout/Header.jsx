@@ -66,6 +66,17 @@ export default function Header() {
                       </Link>
                     </li> */}
 
+                     {!email ? (
+                      <li>
+                        <Link
+                          className="nav-link text-light"
+                          to="/team"
+                        >
+                          Mentors
+                        </Link>
+                      </li>
+                    ) : null}
+
                     {email ? (
                       <li>
                         <Link
