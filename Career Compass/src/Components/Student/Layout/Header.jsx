@@ -135,7 +135,7 @@ export default function Header() {
                       </li>
                     ) : (
                       <>
-                        <li>
+                        {/* <li>
                           <button type="button" class="btn btn-sm btn-warning">
                             <Link
                               className="nav-link text-light"
@@ -144,7 +144,7 @@ export default function Header() {
                               Register
                             </Link>
                           </button>
-                        </li>
+                        </li> */}
 
                         <li>
                           <button

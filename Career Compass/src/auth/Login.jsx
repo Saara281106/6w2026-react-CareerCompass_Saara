@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {  useNavigate } from "react-router-dom";
+import {  Link, useNavigate } from "react-router-dom";
 import UserService from "../services/UserService";
 import { toast } from "react-toastify";
 
@@ -123,6 +123,9 @@ export default function Login() {
                           loading ? "signing in..." : "Sign In"
                       }
                       </button>
+
+<br /><br /><br />
+                      <div className="col col-md-12 text-light"> <Link to="/register"> <em className="text-light"> Don't have an account? Register</em></Link> </div>
                     </div>
                   </div>
                 </form>
